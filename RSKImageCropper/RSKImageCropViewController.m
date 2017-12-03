@@ -616,13 +616,13 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
 
 - (void)onRotateLeftButtonTouch:(UIBarButtonItem *)sender
 {
-    [self setRotationAngle:(self.rotationAngle - (M_PI / 4.0))];
+    [self setRotationAngle:(self.rotationAngle - (M_PI / 2.0))];
     [self update];
 }
 
 - (void)onRotateRightButtonTouch:(UIBarButtonItem *)sender
 {
-    [self setRotationAngle:(self.rotationAngle + (M_PI / 4.0))];
+    [self setRotationAngle:(self.rotationAngle + (M_PI / 2.0))];
     [self update];
 }
 

@@ -267,7 +267,7 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
 
         self.rotateLeftButtonBottomConstraint = [NSLayoutConstraint constraintWithItem:self.cancelButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual
                                                                             toItem:self.rotateLeftButton attribute:NSLayoutAttributeBottom multiplier:1.0f
-                                                                          constant: 8.0];
+                                                                          constant: 32.0];
         [self.view addConstraint:self.rotateLeftButtonBottomConstraint];
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.rotateLeftButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:50.0]];
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.rotateLeftButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:50.0]];
@@ -283,7 +283,7 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
 
         self.rotateRightBottomConstraint = [NSLayoutConstraint constraintWithItem:self.chooseButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual
                                                                             toItem:self.rotateRightButton attribute:NSLayoutAttributeBottom multiplier:1.0f
-                                                                          constant: 8.0];
+                                                                          constant: 32.0];
         [self.view addConstraint:self.rotateRightBottomConstraint];
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.rotateRightButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:50.0]];
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.rotateRightButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:50.0]];
@@ -616,12 +616,14 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
 
 - (void)onRotateLeftButtonTouch:(UIBarButtonItem *)sender
 {
-
+    [self setRotationAngle:(self.rotationAngle - (M_PI / 4.0))];
+    [self update];
 }
 
 - (void)onRotateRightButtonTouch:(UIBarButtonItem *)sender
 {
-
+    [self setRotationAngle:(self.rotationAngle + (M_PI / 4.0))];
+    [self update];
 }
 
 - (void)handleDoubleTap:(UITapGestureRecognizer *)gestureRecognizer
@@ -635,14 +637,19 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
     gestureRecognizer.rotation = 0;
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        [UIView animateWithDuration:kLayoutImageScrollViewAnimationDuration
-                              delay:0.0
-                            options:UIViewAnimationOptionBeginFromCurrentState
-                         animations:^{
-                             [self layoutImageScrollView];
-                         }
-                         completion:nil];
+        [self update];
     }
+}
+
+- (void)update
+{
+    [UIView animateWithDuration:kLayoutImageScrollViewAnimationDuration
+                          delay:0.0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         [self layoutImageScrollView];
+                     }
+                     completion:nil];
 }
 
 #pragma mark - Public

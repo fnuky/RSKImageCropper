@@ -414,7 +414,7 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
         [_rotateLeftButton addTarget:self action:@selector(onRotateLeftButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         _rotateLeftButton.opaque = NO;
     }
-    return _cancelButton;
+    return _rotateLeftButton;
 }
 
 - (UIButton *)rotateRightButton
@@ -428,7 +428,7 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
         [_rotateRightButton addTarget:self action:@selector(onRotateRightButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         _rotateRightButton.opaque = NO;
     }
-    return _chooseButton;
+    return _rotateRightButton;
 }
 
 - (UITapGestureRecognizer *)doubleTapGestureRecognizer

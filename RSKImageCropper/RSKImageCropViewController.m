@@ -265,7 +265,7 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
                                                                            constant: 0.0];
         [self.view addConstraint:self.rotateLeftCenterXConstraint];
 
-        self.rotateLeftButtonBottomConstraint = [NSLayoutConstraint constraintWithItem:self.cancelButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual
+        self.rotateLeftButtonBottomConstraint = [NSLayoutConstraint constraintWithItem:self.cancelButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual
                                                                             toItem:self.rotateLeftButton attribute:NSLayoutAttributeBottom multiplier:1.0f
                                                                           constant: 8.0];
         [self.view addConstraint:self.rotateLeftButtonBottomConstraint];
@@ -281,7 +281,7 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
                                                                             constant:0.0];
         [self.view addConstraint:self.rotateRightCenterXConstraint];
 
-        self.rotateRightBottomConstraint = [NSLayoutConstraint constraintWithItem:self.chooseButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual
+        self.rotateRightBottomConstraint = [NSLayoutConstraint constraintWithItem:self.chooseButton attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual
                                                                             toItem:self.rotateRightButton attribute:NSLayoutAttributeBottom multiplier:1.0f
                                                                           constant: 8.0];
         [self.view addConstraint:self.rotateRightBottomConstraint];
@@ -410,7 +410,7 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
         _rotateLeftButton.translatesAutoresizingMaskIntoConstraints = NO;
         _rotateLeftButton.tintColor = UIColor.whiteColor;
         UIImage *image = [UIImage imageNamed:@"rotateLeft" inBundle: [NSBundle bundleForClass: RSKImageCropViewController.class] compatibleWithTraitCollection: nil];
-        [_rotateRightButton setImage: [image imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [_rotateLeftButton setImage: [image imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [_rotateLeftButton addTarget:self action:@selector(onRotateLeftButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         _rotateLeftButton.opaque = NO;
     }

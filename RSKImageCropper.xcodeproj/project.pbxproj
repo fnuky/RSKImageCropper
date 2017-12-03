@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7009A82B1FD45879004627BA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7009A82A1FD45879004627BA /* Media.xcassets */; };
 		A5BE39D91B32BD2B00ECDF88 /* RSKImageCropper.h in Headers */ = {isa = PBXBuildFile; fileRef = A5BE39CB1B32BD2B00ECDF88 /* RSKImageCropper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5BE39DA1B32BD2B00ECDF88 /* CGGeometry+RSKImageCropper.h in Headers */ = {isa = PBXBuildFile; fileRef = A5BE39CC1B32BD2B00ECDF88 /* CGGeometry+RSKImageCropper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5BE39DB1B32BD2B00ECDF88 /* CGGeometry+RSKImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = A5BE39CD1B32BD2B00ECDF88 /* CGGeometry+RSKImageCropper.m */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7009A82A1FD45879004627BA /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = RSKImageCropper/Media.xcassets; sourceTree = "<group>"; };
 		A5BE393D1B32B49D00ECDF88 /* RSKImageCropper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RSKImageCropper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5BE39CB1B32BD2B00ECDF88 /* RSKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSKImageCropper.h; path = RSKImageCropper/RSKImageCropper.h; sourceTree = "<group>"; };
 		A5BE39CC1B32BD2B00ECDF88 /* CGGeometry+RSKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CGGeometry+RSKImageCropper.h"; path = "RSKImageCropper/CGGeometry+RSKImageCropper.h"; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				A5BE39D61B32BD2B00ECDF88 /* UIApplication+RSKImageCropper.m */,
 				A5BE39D71B32BD2B00ECDF88 /* UIImage+RSKImageCropper.h */,
 				A5BE39D81B32BD2B00ECDF88 /* UIImage+RSKImageCropper.m */,
+				7009A82A1FD45879004627BA /* Media.xcassets */,
 				A5BE39CA1B32BAFA00ECDF88 /* Supporting Files */,
 			);
 			name = RSKImageCropper;
@@ -183,6 +186,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7009A82B1FD45879004627BA /* Media.xcassets in Resources */,
 				B8585B951BD609A100032364 /* RSKImageCropperStrings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

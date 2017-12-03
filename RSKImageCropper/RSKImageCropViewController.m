@@ -60,14 +60,20 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
 @property (strong, nonatomic) UILabel *moveAndScaleLabel;
 @property (strong, nonatomic) UIButton *cancelButton;
 @property (strong, nonatomic) UIButton *chooseButton;
+@property (strong, nonatomic) UIButton *rotateLeftButton;
+@property (strong, nonatomic) UIButton *rotateRightButton;
 
 @property (strong, nonatomic) UITapGestureRecognizer *doubleTapGestureRecognizer;
 @property (strong, nonatomic) UIRotationGestureRecognizer *rotationGestureRecognizer;
 
 @property (assign, nonatomic) BOOL didSetupConstraints;
 @property (strong, nonatomic) NSLayoutConstraint *moveAndScaleLabelTopConstraint;
+@property (strong, nonatomic) NSLayoutConstraint *rotateLeftButtonBottomConstraint;
+@property (strong, nonatomic) NSLayoutConstraint *rotateLeftCenterXConstraint;
 @property (strong, nonatomic) NSLayoutConstraint *cancelButtonBottomConstraint;
 @property (strong, nonatomic) NSLayoutConstraint *cancelButtonLeadingConstraint;
+@property (strong, nonatomic) NSLayoutConstraint *rotateRightBottomConstraint;
+@property (strong, nonatomic) NSLayoutConstraint *rotateRightCenterXConstraint;
 @property (strong, nonatomic) NSLayoutConstraint *chooseButtonBottomConstraint;
 @property (strong, nonatomic) NSLayoutConstraint *chooseButtonTrailingConstraint;
 
@@ -148,6 +154,8 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
     [self.view addSubview:self.moveAndScaleLabel];
     [self.view addSubview:self.cancelButton];
     [self.view addSubview:self.chooseButton];
+    [self.view addSubview:self.rotateLeftButton];
+    [self.view addSubview:self.rotateRightButton];
     
     [self.view addGestureRecognizer:self.doubleTapGestureRecognizer];
     [self.view addGestureRecognizer:self.rotationGestureRecognizer];
@@ -247,7 +255,39 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
                                                                             toItem:self.cancelButton attribute:NSLayoutAttributeBottom multiplier:1.0f
                                                                           constant:constant];
         [self.view addConstraint:self.cancelButtonBottomConstraint];
-        
+
+        // --------------------
+        // The button "Rotate left".
+        // --------------------
+
+        self.rotateLeftCenterXConstraint = [NSLayoutConstraint constraintWithItem:self.cancelButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual
+                                                                             toItem:self.rotateLeftButton attribute:NSLayoutAttributeCenterX multiplier:1.0f
+                                                                           constant: 0.0];
+        [self.view addConstraint:self.rotateLeftCenterXConstraint];
+
+        self.rotateLeftButtonBottomConstraint = [NSLayoutConstraint constraintWithItem:self.cancelButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.rotateLeftButton attribute:NSLayoutAttributeBottom multiplier:1.0f
+                                                                          constant: 8.0];
+        [self.view addConstraint:self.rotateLeftButtonBottomConstraint];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.rotateLeftButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:50.0]];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.rotateLeftButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:50.0]];
+
+        // --------------------
+        // The button "Rotate right".
+        // --------------------
+
+        self.rotateRightCenterXConstraint = [NSLayoutConstraint constraintWithItem:self.chooseButton attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual
+                                                                              toItem:self.rotateRightButton attribute:NSLayoutAttributeCenterX multiplier:1.0f
+                                                                            constant:0.0];
+        [self.view addConstraint:self.rotateRightCenterXConstraint];
+
+        self.rotateRightBottomConstraint = [NSLayoutConstraint constraintWithItem:self.chooseButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual
+                                                                            toItem:self.rotateRightButton attribute:NSLayoutAttributeBottom multiplier:1.0f
+                                                                          constant: 8.0];
+        [self.view addConstraint:self.rotateRightBottomConstraint];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.rotateRightButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:50.0]];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem: self.rotateRightButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:50.0]];
+
         // --------------------
         // The button "Choose".
         // --------------------
@@ -359,6 +399,34 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
         [_chooseButton setTitle:RSKLocalizedString(@"Choose", @"Choose button") forState:UIControlStateNormal];
         [_chooseButton addTarget:self action:@selector(onChooseButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         _chooseButton.opaque = NO;
+    }
+    return _chooseButton;
+}
+
+- (UIButton *)rotateLeftButton
+{
+    if (!_rotateLeftButton) {
+        _rotateLeftButton = [[UIButton alloc] init];
+        _rotateLeftButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _rotateLeftButton.tintColor = UIColor.whiteColor;
+        UIImage *image = [UIImage imageNamed:@"rotateLeft" inBundle: [NSBundle bundleForClass: RSKImageCropViewController.class] compatibleWithTraitCollection: nil];
+        [_rotateRightButton setImage: [image imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [_rotateLeftButton addTarget:self action:@selector(onRotateLeftButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+        _rotateLeftButton.opaque = NO;
+    }
+    return _cancelButton;
+}
+
+- (UIButton *)rotateRightButton
+{
+    if (!_rotateRightButton) {
+        _rotateRightButton = [[UIButton alloc] init];
+        _rotateRightButton.translatesAutoresizingMaskIntoConstraints = NO;
+        _rotateRightButton.tintColor = UIColor.whiteColor;
+        UIImage *image = [UIImage imageNamed:@"rotateRight" inBundle: [NSBundle bundleForClass: RSKImageCropViewController.class] compatibleWithTraitCollection: nil];
+        [_rotateRightButton setImage: [image imageWithRenderingMode: UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [_rotateRightButton addTarget:self action:@selector(onRotateRightButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+        _rotateRightButton.opaque = NO;
     }
     return _chooseButton;
 }
@@ -544,6 +612,16 @@ static const CGFloat kLayoutImageScrollViewAnimationDuration = 0.25;
 - (void)onChooseButtonTouch:(UIBarButtonItem *)sender
 {
     [self cropImage];
+}
+
+- (void)onRotateLeftButtonTouch:(UIBarButtonItem *)sender
+{
+
+}
+
+- (void)onRotateRightButtonTouch:(UIBarButtonItem *)sender
+{
+
 }
 
 - (void)handleDoubleTap:(UITapGestureRecognizer *)gestureRecognizer
